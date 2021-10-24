@@ -21,12 +21,11 @@ cv::Mat numpy_uint8_1c_to_cv_mat(pybind11::array_t<unsigned char>& input)
 
 cv::Mat numpy_uint8_3c_to_cv_mat(pybind11::array_t<unsigned char>& input) 
 {
-    // if (input.ndim() != 3)
-        // throw std::runtime_error("3-channel image must be 3 dims ");
+    if (input.ndim() != 3)
+        throw std::runtime_error("3-channel image must be 3 dims ");
 
     pybind11::buffer_info buf = input.request();
-    cv::Mat mat(buf.shape[1], buf.shape[2], CV_8UC4, (unsigned char*)buf.ptr);
-    // cv::Mat mat(buf.shape[0], buf.shape[1], CV_8UC3, (unsigned char*)buf.ptr);
+    cv::Mat mat(buf.shape[0], buf.shape[1], CV_8UC3, (unsigned char*)buf.ptr);
 
     return mat;
 }

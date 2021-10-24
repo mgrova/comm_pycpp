@@ -4,6 +4,8 @@
 #include <vector>
 #include <memory>
 
+#include<opencv2/opencv.hpp>
+
 namespace pybind11
 {
 class object;
@@ -18,11 +20,11 @@ public:
     PyToCppWrapper();
     ~PyToCppWrapper();
 
-    bool initialize(const std::string &);
+    void initializeDetector();
 
-    void runInference(const std::string &);
+    void runInference(const cv::Mat &);
 
 private:
-    std::unique_ptr<pybind11::object> _customDetector;
+    std::unique_ptr<pybind11::object> _custom_detector;
 };
 }

@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.10)
 project(comm_pycpp DESCRIPTION "Comm Py-Cpp"
-                       LANGUAGES   CXX C
+                   LANGUAGES   CXX C
 )
 
 ##################################
@@ -43,20 +43,20 @@ target_include_directories(${PROJECT_NAME} PUBLIC
 ##################################
 find_package(Python3 COMPONENTS Interpreter Development NumPy REQUIRED)
 if(${Python3_FOUND})
-    target_link_libraries(${PROJECT_NAME} PRIVATE Python3::Python)
-    target_link_libraries(${PROJECT_NAME} PRIVATE Python3::NumPy)
+    target_link_libraries(${PROJECT_NAME} PUBLIC Python3::Python)
+    target_link_libraries(${PROJECT_NAME} PUBLIC Python3::NumPy)
 endif(${Python3_FOUND})
 
 find_package(pybind11 CONFIG REQUIRED)
 if(${pybind11_FOUND})
-    target_link_libraries(${PROJECT_NAME} PRIVATE pybind11::headers)
-    target_link_libraries(${PROJECT_NAME} PRIVATE pybind11::embed)
+    target_link_libraries(${PROJECT_NAME} PUBLIC pybind11::headers)
+    target_link_libraries(${PROJECT_NAME} PUBLIC pybind11::embed)
 endif(${pybind11_FOUND})
 
 find_package(OpenCV REQUIRED)
 if(${OpenCV_FOUND})
-    target_include_directories(${PROJECT_NAME} PRIVATE ${OpenCV_INCLUDE_DIRS})
-    target_link_libraries(${PROJECT_NAME} PRIVATE ${OpenCV_LIBS})
+    target_include_directories(${PROJECT_NAME} PUBLIC ${OpenCV_INCLUDE_DIRS})
+    target_link_libraries(${PROJECT_NAME} PUBLIC ${OpenCV_LIBS})
 endif(${OpenCV_FOUND})
 
 ##################################
